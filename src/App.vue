@@ -1,7 +1,13 @@
 <script setup>
 console.log("Hello World!");
-const message = "Hello World";
+let message = "Hello World";
 const message2 = "<h3>v-htmlディレクティブ</h3>";
+
+//関数の実行
+const upperCase = () => {
+  message = message.toUpperCase();
+};
+upperCase();
 </script>
 
 <template>
