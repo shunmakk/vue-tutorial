@@ -1,6 +1,7 @@
 <script setup>
 console.log("Hello World!");
 const message = "Hello World";
+const message2 = "<h3>v-htmlディレクティブ</h3>";
 </script>
 
 <template>
@@ -8,6 +9,10 @@ const message = "Hello World";
   <p>{{ message }}</p>
   <div>{{ message.length * 100 }}</div>
   <div>{{ message.length > 10 ? "long" : "short" }}</div>
+  <!-- v-textディレクティブ -->
+  <p v-text="message"></p>
+  <!-- v-htmlディレクティブ -->
+  <div v-html="message2"></div>
 </template>
 
 <style scoped>
