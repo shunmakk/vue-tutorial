@@ -23,6 +23,21 @@ const errorBoolean = true;
 const errorNothing = "";
 const stock = 0;
 const errorVshow = true;
+
+//リストの表示1
+const lan = ["Java", "JavaScript", "TypeScript", "Pyhton"];
+const lanVfor = ["Java", "JavaScript", "TypeScript", "Pyhton", "PHP", "C"];
+const users = [
+  { id: 1, name: "John Doe", email: "john@test.com", admin: true },
+  { id: 2, name: "Jane Doe", email: "jane@example.com", admin: false },
+  { id: 3, name: "Kevin MacDonald", email: "kevin@test.com", admin: false },
+];
+const userobj = {
+  id: 1,
+  name: "taro",
+  email: "taro@test.com",
+  admin: true,
+};
 </script>
 
 <template>
@@ -56,6 +71,26 @@ const errorVshow = true;
   <div v-if="errorVshow">
     エラー（v-showの方がv-ifよりもパフォーマンス的に上）
   </div>
+
+  <!-- リストの表示 -->
+  <p>{{ lan[0] }}</p>
+  <p>{{ lan[1] }}</p>
+  <p>{{ lan[2] }}</p>
+  <p v-for="language in lanVfor" :key="language">{{ language }}</p>
+
+  <ul>
+    <li v-for="user in users" :key="user.id" class="list">
+      {{ user.id }}:{{ user.name }}:{{ user.email }}
+    </li>
+  </ul>
+  <div v-for="value in userobj" :key="value">{{ value }}</div>
+  <div v-for="(value, name) in userobj" :key="value">
+    {{ name }}:{{ value }}
+  </div>
+
+  <div v-for="userif in users" :key="userif.id">
+    <div v-if="!userif.admin">{{ userif.name }}</div>
+  </div>
 </template>
 
 <style>
@@ -68,5 +103,9 @@ const errorVshow = true;
 }
 .back {
   background-color: black;
+}
+
+.list {
+  list-style: none;
 }
 </style>
