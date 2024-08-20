@@ -8,6 +8,15 @@ const upperCase = () => {
   message = message.toUpperCase();
 };
 upperCase();
+
+//binding
+const link = "https://google.com";
+const isActive = true;
+const isBack = true;
+const styleObjcet = {
+  color: "blue",
+  fontWeight: 900,
+};
 </script>
 
 <template>
@@ -19,19 +28,26 @@ upperCase();
   <p v-text="message"></p>
   <!-- v-htmlディレクティブ -->
   <div v-html="message2"></div>
+  <!-- binding -->
+  <div>
+    <a v-bind:href="link">Google</a>
+  </div>
+  <p class="underline" :class="{ active: isActive, back: isBack }">
+    v-bindの設定方法の確認(全体のクラスが適用)
+  </p>
+  <p :class="isActive && 'active'">v-bindの設定方法の確認(論理演算子)</p>
+  <p :style="styleObjcet">v-bindの設定方法の確認（style objcet）</p>
 </template>
 
-<style scoped>
-/* .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style>
+.active {
+  color: red;
+  font-weight: 900;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.underline {
+  text-decoration: underline;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-} */
+.back {
+  background-color: black;
+}
 </style>
