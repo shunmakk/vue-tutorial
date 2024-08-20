@@ -17,6 +17,12 @@ const styleObjcet = {
   color: "blue",
   fontWeight: 900,
 };
+//条件分岐
+const error = "エラー発生";
+const errorBoolean = true;
+const errorNothing = "";
+const stock = 0;
+const errorVshow = true;
 </script>
 
 <template>
@@ -37,6 +43,19 @@ const styleObjcet = {
   </p>
   <p :class="isActive && 'active'">v-bindの設定方法の確認(論理演算子)</p>
   <p :style="styleObjcet">v-bindの設定方法の確認（style objcet）</p>
+  <!-- 条件分岐 -->
+  <div v-if="error">{{ error }}</div>
+  <div v-if="errorBoolean">エラーtrue</div>
+  <div v-if="errorNothing">{{ errorNothing }}</div>
+  <div v-else>エラーはないですよ~</div>
+
+  <div v-if="stock > 5">まだ商品に在庫数に余裕があります</div>
+  <div v-else-if="stock === 0">申し訳ございません。現在在庫切れです</div>
+  <div v-else>在庫数が少なくなっています。お急ぎください</div>
+
+  <div v-if="errorVshow">
+    エラー（v-showの方がv-ifよりもパフォーマンス的に上）
+  </div>
 </template>
 
 <style>
