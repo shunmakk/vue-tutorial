@@ -79,6 +79,29 @@ const form = reactive({
 const clickButton2 = () => {
   console.log(form.message);
 };
+
+//Computedプロパティ
+import { computed } from "vue";
+const user2 = reactive({
+  firstName: "yamada",
+  lastName: "taro",
+});
+const fullName = computed({
+  get() {
+    return `${user2.firstName} ${user2.lastName}`;
+  },
+  set(newValue) {
+    const names = newValue.split(" ");
+    user2.firstName = names[0];
+    user2.lastName = names[names.length - 1];
+  },
+});
+
+const changeName = () => {
+  fullName.value = "yoshida taro";
+};
+
+const adminUsers = computed(() => users.filter((user) => user.admin === false));
 </script>
 
 <template>
@@ -154,6 +177,15 @@ const clickButton2 = () => {
   <P>{{ form.message }}</P>
   <input v-model.lazy="form.message" />
   <div><button @click="clickButton2">Click</button></div>
+
+  <!-- Computedプロパティ -->
+  <h2>Computedプロパティ</h2>
+  <h3>fullName: {{ fullName }}</h3>
+  <button @click="changeName">Change Name</button>
+
+  <div v-for="user in adminUsers" :key="user.id">
+    <div>{{ user.id }}{{ user.name }}{{ user.email }}</div>
+  </div>
 </template>
 
 <style>
