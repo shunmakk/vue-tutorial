@@ -70,6 +70,15 @@ const state = reactive({
 const addCount = () => {
   state.count++;
 };
+
+//入力フォーム
+const form = reactive({
+  message: "Hello World",
+});
+
+const clickButton2 = () => {
+  console.log(form.message);
+};
 </script>
 
 <template>
@@ -139,6 +148,12 @@ const addCount = () => {
   <!-- Reactivity -->
   <button type="button" @click="count++">count is {{ count }}</button>
   <button type="button" @click="addCount">count is {{ state.count }}</button>
+
+  <!-- 入力フォーム -->
+  <h2>入力フォーム</h2>
+  <P>{{ form.message }}</P>
+  <input v-model.lazy="form.message" />
+  <div><button @click="clickButton2">Click</button></div>
 </template>
 
 <style>
