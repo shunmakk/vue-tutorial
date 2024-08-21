@@ -38,6 +38,25 @@ const userobj = {
   email: "taro@test.com",
   admin: true,
 };
+
+//クリックイベント
+const clickButton = (msg) => {
+  console.log(msg);
+};
+
+const clickEvent = (event) => {
+  console.log(event.target);
+  event.target.style.backgroundColor = "red";
+};
+
+const send = (event) => {
+  event.preventDefault();
+  console.log("send");
+};
+
+const send2 = () => {
+  console.log("send2");
+};
 </script>
 
 <template>
@@ -91,6 +110,18 @@ const userobj = {
   <div v-for="userif in users" :key="userif.id">
     <div v-if="!userif.admin">{{ userif.name }}</div>
   </div>
+
+  <!-- イベント設定 -->
+  <button @click="clickButton('クリック成功')">click</button>
+  <button @click="clickEvent($event)">クリック</button>
+
+  <form @submit="send($event)">
+    <button>送信(イベント修飾子)</button>
+  </form>
+
+  <form @submit.prevent="send2">
+    <button @keyup.enter="submit">送信(キー修飾子)</button>
+  </form>
 </template>
 
 <style>
