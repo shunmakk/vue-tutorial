@@ -59,7 +59,7 @@ const send2 = () => {
 };
 
 //Reactivity
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 const count = ref(0);
 console.log(count.value);
 
@@ -102,6 +102,31 @@ const changeName = () => {
 };
 
 const adminUsers = computed(() => users.filter((user) => user.admin === false));
+
+//watcher
+import { watch } from "vue";
+const count2 = ref(0);
+
+watch(count2, (count, previousCount) => {
+  console.log("count:", count);
+  console.log("previousCount", previousCount);
+});
+
+const state2 = reactive({
+  count: 0,
+});
+watch(
+  () => state2.count,
+  (count, previousCount) => {
+    console.log("count:", count);
+    console.log("previousCount:", previousCount);
+  }
+);
+
+const count3 = ref(0);
+const count4 = ref(100);
+
+watchEffect(() => console.log(`${count3.value}+${count4.value}`));
 </script>
 
 <template>
@@ -186,6 +211,14 @@ const adminUsers = computed(() => users.filter((user) => user.admin === false));
   <div v-for="user in adminUsers" :key="user.id">
     <div>{{ user.id }}{{ user.name }}{{ user.email }}</div>
   </div>
+
+  <!-- watcher -->
+  <h2>Watcher</h2>
+  <button @click="count2++">Count: {{ count2 }} ref</button>
+  <button @click="state2.count++">Count: {{ state2.count }} reactive</button>
+  <h3>watchEffect</h3>
+  <button @click="count3++">Count:{{ count3 }}</button>
+  <button @click="count4++">Count2:{{ count4 }}</button>
 </template>
 
 <style>
