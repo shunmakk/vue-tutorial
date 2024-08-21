@@ -57,6 +57,19 @@ const send = (event) => {
 const send2 = () => {
   console.log("send2");
 };
+
+//Reactivity
+import { ref } from "vue";
+const count = ref(0);
+console.log(count.value);
+
+import { reactive } from "vue";
+const state = reactive({
+  count: 0,
+});
+const addCount = () => {
+  state.count++;
+};
 </script>
 
 <template>
@@ -122,6 +135,10 @@ const send2 = () => {
   <form @submit.prevent="send2">
     <button @keyup.enter="submit">送信(キー修飾子)</button>
   </form>
+
+  <!-- Reactivity -->
+  <button type="button" @click="count++">count is {{ count }}</button>
+  <button type="button" @click="addCount">count is {{ state.count }}</button>
 </template>
 
 <style>
